@@ -10,16 +10,18 @@ namespace VY_CS.AmmoSystem.Muzzle
         [SerializeField] private int angle = 60;         // Toplam açı yayılımı
         [SerializeField] private int angleCount = 5;     // Kaç mermi atılacak
 
-        public override HashSet<BulletBase> GetBullets(BulletMagazine magazine)
+        private HashSet<BulletBase> _bullets = new();
+
+        public override HashSet<BulletBase> PrepareBullets(BulletMagazine magazine)
         {
-            HashSet<BulletBase> bullets = new();
+            _bullets.Clear();
 
             float angleStep = angleCount > 1 ? (float)angle / (angleCount - 1) : 0f;
             float startAngle;
 
             if (angleCount % 2 == 1)
             {
-                // Tek sayida -> Ortadan başla
+                // Tek sayida -> Ortadan basla
                 startAngle = -angle / 2f;
             }
             else
@@ -32,13 +34,13 @@ namespace VY_CS.AmmoSystem.Muzzle
             {
                 BulletBase bullet = magazine.GetBullet();
 
-                bullet.transform.position = transform.position;
+                bullet.transform.position = muzzlePosition;
                 bullet.transform.rotation = Quaternion.Euler(0, 0, startAngle + i * angleStep);
 
-                bullets.Add(bullet);
+                _bullets.Add(bullet);
             }
 
-            return bullets;
+            return _bullets;
         }
     }
 }

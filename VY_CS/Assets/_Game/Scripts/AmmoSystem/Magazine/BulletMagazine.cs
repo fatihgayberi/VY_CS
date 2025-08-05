@@ -1,24 +1,22 @@
-using UnityEngine;
 using Wonnasmith.Pooling;
 using VY_CS.AmmoSystem.Bullet;
 
 namespace VY_CS.AmmoSystem.Magazine
 {
-    public class BulletMagazine : MonoBehaviour, IBulletMagazine
+    public class BulletMagazine : IBulletMagazine
     {
-        [SerializeField] private Pool<BulletBase> bulletPool;
+        private Pool<BulletBase> _bulletPool;
 
-        private void Start()
+        public BulletMagazine(Pool<BulletBase> bulletPool)
         {
-            if (bulletPool == null) return;
-            bulletPool.InitialPoolObjects();
+            _bulletPool = bulletPool;
         }
 
         public BulletBase GetBullet()
         {
-            if (bulletPool == null) return null;
+            if (_bulletPool == null) return null;
 
-            BulletBase bullet = bulletPool.GetPoolObject();
+            BulletBase bullet = _bulletPool.GetPoolObject();
             if (bullet == null) return null;
 
             bullet.BulletLifeFinished += BulletReturnToPool;
@@ -29,7 +27,7 @@ namespace VY_CS.AmmoSystem.Magazine
         {
             bullet.BulletLifeFinished -= BulletReturnToPool;
 
-            bulletPool?.RePoolObject(bullet);
+            _bulletPool?.RePoolObject(bullet);
         }
     }
 }

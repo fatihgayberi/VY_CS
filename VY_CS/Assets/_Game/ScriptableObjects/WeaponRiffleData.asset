@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d12e54ed8489d7e478068d0e777da397, type: 3}
   m_Name: WeaponRiffleData
   m_EditorClassIdentifier: 
+  weaponType: 1
   weaponProperty:
     _fireRate: 1
     _serialShootBulletCount: 3

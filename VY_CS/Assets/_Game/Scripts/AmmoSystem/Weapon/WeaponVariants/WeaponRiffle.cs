@@ -1,21 +1,17 @@
-using UnityEngine;
-using VY_CS.AmmoSystem.Muzzle;
 using VY_CS.AmmoSystem.Bullet;
-using VY_CS.AmmoSystem.Magazine;
 using System.Collections.Generic;
 
 namespace VY_CS.AmmoSystem.Weapon
 {
     public class WeaponRiffle : WeaponBase
     {
-        [SerializeField] private MuzzleBase muzzleBase;
-        [SerializeField] private BulletMagazine magazine;
+        public WeaponRiffle(WeaponData weaponData) : base(weaponData) { }
 
         public override void Shoot()
         {
-            if (magazine == null) return;
+            if (_magazine == null) return;
 
-            HashSet<BulletBase> bullets = muzzleBase.GetBullets(magazine);
+            HashSet<BulletBase> bullets = _muzzleBase.PrepareBullets(_magazine);
 
             foreach (BulletBase bullet in bullets)
             {

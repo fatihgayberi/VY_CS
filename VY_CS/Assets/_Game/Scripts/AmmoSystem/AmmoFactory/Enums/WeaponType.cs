@@ -1,6 +1,6 @@
 namespace VY_CS.AmmoSystem
 {
-    public enum AmmoType
+    public enum WeaponType
     {
         NONE = 0,
 
