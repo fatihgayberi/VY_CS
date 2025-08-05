@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: WeaponRiffleData
   m_EditorClassIdentifier: 
   weaponProperty:
-    _fireRate: 2
-    _triggerInterval: 0.3
-    _bulletsPerTrigger: 4
+    _fireRate: 1
+    _serialShootBulletCount: 3
+    _serialShootBulletWaitTime: 0.1

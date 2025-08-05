@@ -1,25 +1,27 @@
 using UnityEngine;
+using VY_CS.AmmoSystem.Muzzle;
 using VY_CS.AmmoSystem.Bullet;
 using VY_CS.AmmoSystem.Magazine;
+using System.Collections.Generic;
 
 namespace VY_CS.AmmoSystem.Weapon
 {
     public class WeaponRiffle : WeaponBase
     {
+        [SerializeField] private MuzzleBase muzzleBase;
         [SerializeField] private BulletMagazine magazine;
 
         public override void Shoot()
         {
             if (magazine == null) return;
 
-            BulletBase bullet = magazine.GetBullet();
+            HashSet<BulletBase> bullets = muzzleBase.GetBullets(magazine);
 
-            if (bullet == null) return;
-
-            bullet.transform.position = transform.position;
-            bullet.gameObject.SetActive(true);
-
-            bullet.LifeStart();
+            foreach (BulletBase bullet in bullets)
+            {
+                bullet.gameObject.SetActive(true);
+                bullet.LifeStart();
+            }
         }
     }
 }
