@@ -1,5 +1,6 @@
 using UnityEngine;
 using VY_CS.AmmoSystem.Bullet;
+using VY_CS.AmmoSystem.Weapon;
 
 namespace VY_CS.AmmoSystem.BulletVariants
 {
@@ -7,7 +8,7 @@ namespace VY_CS.AmmoSystem.BulletVariants
     {
         public override void Move()
         {
-            transform.position += transform.right * 3f * Time.fixedDeltaTime;
+            transform.position += transform.right * WeaponDataHandler.WeaponPropertyController.GetPropertyValue(WeaponPropertyType.BulletSpeed) * Time.fixedDeltaTime;
         }
     }
 }

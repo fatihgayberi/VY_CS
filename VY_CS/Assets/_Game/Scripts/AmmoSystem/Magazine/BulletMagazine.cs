@@ -12,6 +12,11 @@ namespace VY_CS.AmmoSystem.Magazine
             _bulletPool = bulletPool;
         }
 
+        public void SwitchBullet(Pool<BulletBase> bulletPool)
+        {
+            _bulletPool = bulletPool;
+        }
+
         public BulletBase GetBullet()
         {
             if (_bulletPool == null) return null;
@@ -26,7 +31,7 @@ namespace VY_CS.AmmoSystem.Magazine
         private void BulletReturnToPool(BulletBase bullet)
         {
             bullet.BulletLifeFinished -= BulletReturnToPool;
-
+            bullet.gameObject.SetActive(false);
             _bulletPool?.RePoolObject(bullet);
         }
     }

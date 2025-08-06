@@ -5,8 +5,6 @@ namespace VY_CS.AmmoSystem.Weapon
 {
     public class WeaponRiffle : WeaponBase
     {
-        public WeaponRiffle(WeaponData weaponData) : base(weaponData) { }
-
         public override void Shoot()
         {
             if (_magazine == null) return;

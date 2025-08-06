@@ -8,12 +8,10 @@ namespace VY_CS.AmmoSystem.Weapon
     {
         protected MuzzleBase _muzzleBase;
         protected BulletMagazine _magazine;
-        private WeaponData _weaponData;
         private WeaponState _weaponState = new();
 
-        protected WeaponBase(WeaponData weaponData)
+        protected WeaponBase()
         {
-            _weaponData = weaponData;
             StartShootLoop().Forget();
         }
 
@@ -21,24 +19,34 @@ namespace VY_CS.AmmoSystem.Weapon
 
         private async UniTaskVoid StartShootLoop()
         {
+            float serialShootBulletCount;
+            float serialShootBulletWaitTime;
+            float fireRate;
+
             while (true)
             {
-                for (int i = 0; i < _weaponData.weaponProperty.SerialShootBulletCount; i++)
+                serialShootBulletCount = WeaponDataHandler.WeaponPropertyController.GetPropertyValue(WeaponPropertyType.SerialShootBulletCount);
+                serialShootBulletWaitTime = WeaponDataHandler.WeaponPropertyController.GetPropertyValue(WeaponPropertyType.SerialShootBulletWaitTime);
+                fireRate = WeaponDataHandler.WeaponPropertyController.GetPropertyValue(WeaponPropertyType.FireRate);
+
+                // Debug.Log($"Serial Shoot Bullet Count: {serialShootBulletCount}, Wait Time: {serialShootBulletWaitTime}, Fire Rate: {fireRate}");
+
+                for (int i = 0; i < serialShootBulletCount; i++)
                 {
                     _weaponState.SetState(WeaponStateType.Shooting);
                     Shoot();
 
                     // seri atis icin timerin beklemesine gerek var mi diye kontrol ediyoruz
-                    if (_weaponData.weaponProperty.SerialShootBulletCount > 1)
+                    if (serialShootBulletCount > 1)
                     {
                         _weaponState.SetState(WeaponStateType.Idle);
-                        await UniTask.Delay((int)(_weaponData.weaponProperty.SerialShootBulletWaitTime * 1000), delayTiming: PlayerLoopTiming.FixedUpdate);
+                        await UniTask.Delay((int)(serialShootBulletWaitTime * 1000), delayTiming: PlayerLoopTiming.FixedUpdate);
                     }
                 }
 
                 // Reload time
                 _weaponState.SetState(WeaponStateType.Reloading);
-                await UniTask.Delay((int)(_weaponData.weaponProperty.FireRate * 1000), delayTiming: PlayerLoopTiming.FixedUpdate);
+                await UniTask.Delay((int)(fireRate * 1000), delayTiming: PlayerLoopTiming.FixedUpdate);
             }
         }
 

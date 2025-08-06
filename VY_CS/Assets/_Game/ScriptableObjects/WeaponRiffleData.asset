@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponType: 1
   weaponProperty:
-    _fireRate: 1
-    _serialShootBulletCount: 3
-    _serialShootBulletWaitTime: 0.1
+    FireRate: 3
+    SerialShootBulletCount: 1
+    SerialShootBulletWaitTime: 0.2
+    BulletSpeed: 3

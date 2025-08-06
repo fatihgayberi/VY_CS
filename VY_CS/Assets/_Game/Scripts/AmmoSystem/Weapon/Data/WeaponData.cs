@@ -12,12 +12,9 @@ namespace VY_CS.AmmoSystem.Weapon
     [System.Serializable]
     public class WeaponProperty
     {
-        [SerializeField, Min(0.1f)] private float _fireRate;
-        [SerializeField, Min(1)] private uint _serialShootBulletCount;
-        [SerializeField, Min(0)] private float _serialShootBulletWaitTime;
-
-        public float FireRate => _fireRate;
-        public uint SerialShootBulletCount => _serialShootBulletCount;
-        public float SerialShootBulletWaitTime => _serialShootBulletWaitTime;
+        public float FireRate;
+        public float SerialShootBulletCount;
+        public float SerialShootBulletWaitTime;
+        public float BulletSpeed;
     }
 }

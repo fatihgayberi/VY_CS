@@ -11,18 +11,25 @@ namespace VY_CS.Character
     public class WeaponHandler : MonoBehaviour
     {
         [SerializeField] private AmmoFactory ammoFactory;
-        [SerializeField] private DefaultWeaponProperties defaultWeaponProperties;
+        [SerializeField] private WeaponProperties defaultWeaponProperties;
 
         private WeaponBase _weaponBase;
         private MuzzleBase _muzzleBase;
         private BulletMagazine _magazine;
 
+        private WeaponProperties _currentWeaponProperties;
+
+
         private void Start()
         {
+            _currentWeaponProperties = defaultWeaponProperties;
+
+            WeaponDataHandler.Initialize(ammoFactory.GetWeaponData(_currentWeaponProperties.WeaponType));
+
             // silahi yaptik
-            _weaponBase = ammoFactory.CreateWeapon(defaultWeaponProperties.WeaponType);
-            _magazine = ammoFactory.CreateMagazine(defaultWeaponProperties.BulletType);
-            _muzzleBase = ammoFactory.CreateMuzzle(defaultWeaponProperties.MuzzleType);
+            _weaponBase = ammoFactory.CreateWeapon(_currentWeaponProperties.WeaponType);
+            _magazine = ammoFactory.CreateMagazine(_currentWeaponProperties.BulletType);
+            _muzzleBase = ammoFactory.CreateMuzzle(_currentWeaponProperties.MuzzleType);
 
             // sarjoru taktik
             _weaponBase.AttachMagazine(_magazine);
@@ -31,8 +38,14 @@ namespace VY_CS.Character
             _weaponBase.AttachMuzzle(_muzzleBase);
         }
 
+        private void UpdateMuzzle(MuzzleType muzzleType)
+        {
+            _muzzleBase = ammoFactory.CreateMuzzle(muzzleType);
+            _weaponBase.AttachMuzzle(_muzzleBase);
+        }
+
         [Serializable]
-        private struct DefaultWeaponProperties
+        private struct WeaponProperties
         {
             public WeaponType WeaponType;
             public BulletType BulletType;

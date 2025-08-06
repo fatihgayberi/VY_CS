@@ -3,8 +3,8 @@ using UnityEngine;
 using Wonnasmith.Pooling;
 using VY_CS.AmmoSystem.Bullet;
 using VY_CS.AmmoSystem.Weapon;
-using VY_CS.AmmoSystem.Magazine;
 using VY_CS.AmmoSystem.Muzzle;
+using VY_CS.AmmoSystem.Magazine;
 
 namespace VY_CS.AmmoSystem.AmmoSystem
 {
@@ -15,16 +15,14 @@ namespace VY_CS.AmmoSystem.AmmoSystem
 
         public WeaponBase CreateWeapon(WeaponType weaponType)
         {
-            WeaponData weaponData = GetWeaponData(weaponType);
-
             return weaponType switch
             {
-                WeaponType.Riffle => new WeaponRiffle(weaponData),
+                WeaponType.Riffle => new WeaponRiffle(),
                 _ => null
             };
         }
 
-        private WeaponData GetWeaponData(WeaponType weaponType)
+        public WeaponData GetWeaponData(WeaponType weaponType)
         {
             foreach (var data in weaponData)
             {
