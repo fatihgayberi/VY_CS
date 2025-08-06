@@ -1,47 +1,59 @@
 using System;
 using UnityEngine;
 using VY_CS.AmmoSystem;
-using VY_CS.AmmoSystem.Muzzle;
+using VY_CS.AmmoSystem.Ammo;
 using VY_CS.AmmoSystem.Weapon;
-using VY_CS.AmmoSystem.Magazine;
-using VY_CS.AmmoSystem.AmmoSystem;
+using System.Collections.Generic;
 
 namespace VY_CS.Character
 {
     public class WeaponHandler : MonoBehaviour
     {
         [SerializeField] private AmmoFactory ammoFactory;
-        [SerializeField] private WeaponProperties defaultWeaponProperties;
+        [SerializeField] private WeaponProperties mainWeaponProperties;
 
-        private WeaponBase _weaponBase;
-        private MuzzleBase _muzzleBase;
-        private BulletMagazine _magazine;
+        private WeaponContainer _mainWeapon;
 
-        private WeaponProperties _currentWeaponProperties;
-
+        private HashSet<WeaponContainer> _weaponContainers = new();
 
         private void Start()
         {
-            _currentWeaponProperties = defaultWeaponProperties;
+            _mainWeapon = new WeaponContainer();
+            WeaponDataHandler.Initialize(ammoFactory.GetWeaponData(mainWeaponProperties.WeaponType));
 
-            WeaponDataHandler.Initialize(ammoFactory.GetWeaponData(_currentWeaponProperties.WeaponType));
-
-            // silahi yaptik
-            _weaponBase = ammoFactory.CreateWeapon(_currentWeaponProperties.WeaponType);
-            _magazine = ammoFactory.CreateMagazine(_currentWeaponProperties.BulletType);
-            _muzzleBase = ammoFactory.CreateMuzzle(_currentWeaponProperties.MuzzleType);
-
-            // sarjoru taktik
-            _weaponBase.AttachMagazine(_magazine);
-
-            // namluyu yerlestirdik
-            _weaponBase.AttachMuzzle(_muzzleBase);
+            WeaponCreator(_mainWeapon, mainWeaponProperties);
         }
 
-        private void UpdateMuzzle(MuzzleType muzzleType)
+        private void WeaponCreator(WeaponContainer weaponContainer, WeaponProperties weaponProperties)
         {
-            _muzzleBase = ammoFactory.CreateMuzzle(muzzleType);
-            _weaponBase.AttachMuzzle(_muzzleBase);
+            // silahi yaptik
+            weaponContainer.WeaponBase = ammoFactory.CreateWeapon(weaponProperties.WeaponType);
+            weaponContainer.Magazine = ammoFactory.CreateMagazine(weaponProperties.BulletType);
+            weaponContainer.MuzzleBase = ammoFactory.CreateMuzzle(weaponProperties.MuzzleType);
+
+            // sarjoru taktik
+            weaponContainer.WeaponBase.AttachMagazine(weaponContainer.Magazine);
+
+            // namluyu yerlestirdik
+            weaponContainer.WeaponBase.AttachMuzzle(weaponContainer.MuzzleBase);
+
+            _weaponContainers.Add(weaponContainer);
+
+            weaponContainer.WeaponBase.ShootStarter();
+        }
+
+        public void UpdateMuzzle(MuzzleType muzzleType)
+        {
+            foreach (var item in _weaponContainers)
+            {
+                item.MuzzleBase = ammoFactory.CreateMuzzle(muzzleType);
+                item.WeaponBase.AttachMuzzle(item.MuzzleBase);
+            }
+        }
+
+        public void WeaponDuplicate()
+        {
+            WeaponCreator(new WeaponContainer(), mainWeaponProperties);
         }
 
         [Serializable]

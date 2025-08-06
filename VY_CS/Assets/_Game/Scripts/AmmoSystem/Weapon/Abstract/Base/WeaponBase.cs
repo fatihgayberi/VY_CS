@@ -1,17 +1,25 @@
+using System;
 using Cysharp.Threading.Tasks;
 using VY_CS.AmmoSystem.Muzzle;
 using VY_CS.AmmoSystem.Magazine;
+using UnityEngine;
 
 namespace VY_CS.AmmoSystem.Weapon
 {
+    [Serializable]
     public abstract class WeaponBase : IShootable, IWeapon
     {
         protected MuzzleBase _muzzleBase;
         protected BulletMagazine _magazine;
         private WeaponState _weaponState = new();
+        protected Vector2 weaponPosition;
 
-        protected WeaponBase()
+        private string _weaponName;
+
+        public void ShootStarter()
         {
+            _weaponName = Guid.NewGuid().ToString();
+            weaponPosition = UnityEngine.Random.insideUnitCircle * 5f;
             StartShootLoop().Forget();
         }
 

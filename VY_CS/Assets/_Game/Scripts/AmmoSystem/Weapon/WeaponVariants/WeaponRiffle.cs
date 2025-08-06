@@ -9,7 +9,7 @@ namespace VY_CS.AmmoSystem.Weapon
         {
             if (_magazine == null) return;
 
-            HashSet<BulletBase> bullets = _muzzleBase.PrepareBullets(_magazine);
+            HashSet<BulletBase> bullets = _muzzleBase.PrepareBullets(_magazine, weaponPosition);
 
             foreach (BulletBase bullet in bullets)
             {

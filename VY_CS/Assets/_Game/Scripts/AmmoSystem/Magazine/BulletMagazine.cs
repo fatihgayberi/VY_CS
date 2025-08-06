@@ -1,8 +1,10 @@
+using System;
 using Wonnasmith.Pooling;
 using VY_CS.AmmoSystem.Bullet;
 
 namespace VY_CS.AmmoSystem.Magazine
 {
+    [Serializable]
     public class BulletMagazine : IBulletMagazine
     {
         private Pool<BulletBase> _bulletPool;

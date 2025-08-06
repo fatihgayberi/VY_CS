@@ -12,7 +12,7 @@ namespace VY_CS.AmmoSystem.Muzzle
 
         private HashSet<BulletBase> _bullets = new();
 
-        public override HashSet<BulletBase> PrepareBullets(BulletMagazine magazine)
+        public override HashSet<BulletBase> PrepareBullets(BulletMagazine magazine, Vector2 weaponPosition)
         {
             _bullets.Clear();
 
@@ -34,7 +34,7 @@ namespace VY_CS.AmmoSystem.Muzzle
             {
                 BulletBase bullet = magazine.GetBullet();
 
-                bullet.transform.position = muzzlePosition;
+                bullet.transform.position = weaponPosition;
                 bullet.transform.rotation = Quaternion.Euler(0, 0, startAngle + i * angleStep);
 
                 _bullets.Add(bullet);

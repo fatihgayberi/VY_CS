@@ -6,7 +6,7 @@ using VY_CS.AmmoSystem.Weapon;
 using VY_CS.AmmoSystem.Muzzle;
 using VY_CS.AmmoSystem.Magazine;
 
-namespace VY_CS.AmmoSystem.AmmoSystem
+namespace VY_CS.AmmoSystem.Ammo
 {
     public class AmmoFactory : MonoBehaviour
     {

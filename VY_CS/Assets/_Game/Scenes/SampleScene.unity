@@ -342,6 +342,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 714926811414415808, guid: 8a53fae56e6a67f4d9500d5f2446bf4a, type: 3}
   m_PrefabInstance: {fileID: 523786965}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &523786967 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 714926811414415823, guid: 8a53fae56e6a67f4d9500d5f2446bf4a, type: 3}
+  m_PrefabInstance: {fileID: 523786965}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &619394800
 GameObject:
   m_ObjectHideFlags: 0
@@ -583,6 +594,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 714926811414415808, guid: 8a53fae56e6a67f4d9500d5f2446bf4a, type: 3}
   m_PrefabInstance: {fileID: 854123973}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &854123975 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 714926811414415823, guid: 8a53fae56e6a67f4d9500d5f2446bf4a, type: 3}
+  m_PrefabInstance: {fileID: 854123973}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &876137677
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -645,6 +667,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 714926811414415808, guid: 8a53fae56e6a67f4d9500d5f2446bf4a, type: 3}
   m_PrefabInstance: {fileID: 876137677}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &876137679 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 714926811414415823, guid: 8a53fae56e6a67f4d9500d5f2446bf4a, type: 3}
+  m_PrefabInstance: {fileID: 876137677}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &893926252
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -707,6 +740,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 714926811414415808, guid: 8a53fae56e6a67f4d9500d5f2446bf4a, type: 3}
   m_PrefabInstance: {fileID: 893926252}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &893926254 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 714926811414415823, guid: 8a53fae56e6a67f4d9500d5f2446bf4a, type: 3}
+  m_PrefabInstance: {fileID: 893926252}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1299535022
 GameObject:
   m_ObjectHideFlags: 0
@@ -805,7 +849,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ammoFactory: {fileID: 1299535023}
-  defaultWeaponProperties:
+  mainWeaponProperties:
     WeaponType: 1
     BulletType: 1
     MuzzleType: 1
@@ -1062,7 +1106,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 803c6ad783930934eb7db80dc612b5ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weaponHandler: {fileID: 1735663914}
   maxSkillCount: 3
+  buttons:
+  - skillType: 1
+    button: {fileID: 714926811454902056}
+  - skillType: 4
+    button: {fileID: 854123975}
+  - skillType: 5
+    button: {fileID: 893926254}
+  - skillType: 2
+    button: {fileID: 876137679}
+  - skillType: 3
+    button: {fileID: 523786967}
 --- !u!1001 &714926811454902055
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1158,33 +1214,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: SkillButton
       objectReference: {fileID: 0}
-    - target: {fileID: 714926811414415823, guid: 8a53fae56e6a67f4d9500d5f2446bf4a, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 714926811414415823, guid: 8a53fae56e6a67f4d9500d5f2446bf4a, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 714926811414415823, guid: 8a53fae56e6a67f4d9500d5f2446bf4a, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1992109511}
-    - target: {fileID: 714926811414415823, guid: 8a53fae56e6a67f4d9500d5f2446bf4a, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 714926811414415823, guid: 8a53fae56e6a67f4d9500d5f2446bf4a, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SkillButtonPressed
-      objectReference: {fileID: 0}
-    - target: {fileID: 714926811414415823, guid: 8a53fae56e6a67f4d9500d5f2446bf4a, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: VY_CS.SkillSystem.SkillFactory, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 714926811414415823, guid: 8a53fae56e6a67f4d9500d5f2446bf4a, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8a53fae56e6a67f4d9500d5f2446bf4a, type: 3}
+--- !u!114 &714926811454902056 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 714926811414415823, guid: 8a53fae56e6a67f4d9500d5f2446bf4a, type: 3}
+  m_PrefabInstance: {fileID: 714926811454902055}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

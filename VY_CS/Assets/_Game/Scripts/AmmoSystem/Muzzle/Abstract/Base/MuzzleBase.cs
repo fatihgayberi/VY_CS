@@ -1,13 +1,14 @@
-using UnityEngine;
+using System;
 using VY_CS.AmmoSystem.Bullet;
 using VY_CS.AmmoSystem.Magazine;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace VY_CS.AmmoSystem.Muzzle
 {
+    [Serializable]
     public abstract class MuzzleBase : IMuzzle
     {
-        protected Vector3 muzzlePosition;
-        public abstract HashSet<BulletBase> PrepareBullets(BulletMagazine magazine);
+        public abstract HashSet<BulletBase> PrepareBullets(BulletMagazine magazine, Vector2 weaponPosition);
     }
 }
