@@ -10,18 +10,41 @@ namespace VY_CS.Character
     public class WeaponHandler : MonoBehaviour
     {
         [SerializeField] private AmmoFactory ammoFactory;
-        [SerializeField] private WeaponProperties mainWeaponProperties;
+        [SerializeField] private WeaponProperties defaultWeaponProperties;
+
+        private WeaponProperties _mainWeaponProperties;
 
         private WeaponContainer _mainWeapon;
+        private List<WeaponContainer> _weaponContainers = new();
 
-        private HashSet<WeaponContainer> _weaponContainers = new();
-
-        private void Start()
+        private void OnEnable()
         {
-            _mainWeapon = new WeaponContainer();
-            WeaponDataHandler.Initialize(ammoFactory.GetWeaponData(mainWeaponProperties.WeaponType));
+            GameManager.Instance.GameStart += OnGameStart;
+            GameManager.Instance.GameExit += OnGameExit;
+        }
+        private void OnDisable()
+        {
+            GameManager.Instance.GameStart -= OnGameStart;
+            GameManager.Instance.GameExit -= OnGameExit;
+        }
 
-            WeaponCreator(_mainWeapon, mainWeaponProperties);
+        private void OnGameStart()
+        {
+            _mainWeaponProperties = defaultWeaponProperties;
+            _mainWeapon = new WeaponContainer();
+            WeaponDataHandler.Initialize(ammoFactory.GetWeaponData(_mainWeaponProperties.WeaponType));
+
+            WeaponCreator(_mainWeapon, _mainWeaponProperties);
+        }
+        private void OnGameExit()
+        {
+            foreach (var item in _weaponContainers)
+            {
+                item?.Magazine?.Dispose();
+                item?.WeaponBase?.Dispose();
+            }
+
+            _weaponContainers?.Clear();
         }
 
         private void WeaponCreator(WeaponContainer weaponContainer, WeaponProperties weaponProperties)
@@ -42,18 +65,20 @@ namespace VY_CS.Character
             weaponContainer.WeaponBase.ShootStarter();
         }
 
+        public void WeaponDuplicate()
+        {
+            WeaponCreator(new WeaponContainer(), _mainWeaponProperties);
+        }
+
         public void UpdateMuzzle(MuzzleType muzzleType)
         {
+            _mainWeaponProperties.MuzzleType = muzzleType;
+
             foreach (var item in _weaponContainers)
             {
                 item.MuzzleBase = ammoFactory.CreateMuzzle(muzzleType);
                 item.WeaponBase.AttachMuzzle(item.MuzzleBase);
             }
-        }
-
-        public void WeaponDuplicate()
-        {
-            WeaponCreator(new WeaponContainer(), mainWeaponProperties);
         }
 
         [Serializable]

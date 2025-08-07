@@ -8,7 +8,8 @@ using VY_CS.AmmoSystem.Magazine;
 
 namespace VY_CS.AmmoSystem.Ammo
 {
-    public class AmmoFactory : MonoBehaviour
+    [Serializable]
+    public class AmmoFactory
     {
         [SerializeField] private WeaponData[] weaponData;
         [SerializeField] private BulletPoolData[] bulletPoolData;

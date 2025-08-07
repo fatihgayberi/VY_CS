@@ -13,6 +13,20 @@ namespace VY_CS.SkillSystem
 
         private int currentSkillCount = 0;
 
+        private void OnEnable()
+        {
+            GameManager.Instance.GameStart += OnGameStart;
+        }
+        private void OnDisable()
+        {
+            GameManager.Instance.GameStart -= OnGameStart;
+        }
+
+        private void OnGameStart()
+        {
+            currentSkillCount = 0;
+        }
+
         private void Start()
         {
             ButtonSetup();

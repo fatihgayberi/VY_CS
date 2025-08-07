@@ -1,20 +1,17 @@
 using System;
 using Wonnasmith.Pooling;
 using VY_CS.AmmoSystem.Bullet;
+using System.Collections.Generic;
 
 namespace VY_CS.AmmoSystem.Magazine
 {
     [Serializable]
-    public class BulletMagazine : IBulletMagazine
+    public class BulletMagazine : IBulletMagazine, IDisposable
     {
         private Pool<BulletBase> _bulletPool;
+        private HashSet<IBullet> activeBullets = new();
 
         public BulletMagazine(Pool<BulletBase> bulletPool)
-        {
-            _bulletPool = bulletPool;
-        }
-
-        public void SwitchBullet(Pool<BulletBase> bulletPool)
         {
             _bulletPool = bulletPool;
         }
@@ -27,14 +24,25 @@ namespace VY_CS.AmmoSystem.Magazine
             if (bullet == null) return null;
 
             bullet.BulletLifeFinished += BulletReturnToPool;
+            activeBullets.Add(bullet);
             return bullet;
         }
 
         private void BulletReturnToPool(BulletBase bullet)
         {
+            activeBullets.Remove(bullet);
             bullet.BulletLifeFinished -= BulletReturnToPool;
-            bullet.gameObject.SetActive(false);
             _bulletPool?.RePoolObject(bullet);
+        }
+
+        public void Dispose()
+        {
+            _bulletPool.AllRePoolObject();
+
+            foreach (var item in activeBullets)
+            {
+                item.BulletLifeFinished -= BulletReturnToPool;
+            }
         }
     }
 }

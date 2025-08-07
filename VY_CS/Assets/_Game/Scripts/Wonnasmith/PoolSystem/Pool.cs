@@ -5,7 +5,7 @@ using System.Collections.Generic;
 namespace Wonnasmith.Pooling
 {
     [Serializable]
-    public class Pool<T>
+    public class Pool<T> where T : IPoolable
     {
         [Serializable]
         public class PoolData
@@ -32,15 +32,20 @@ namespace Wonnasmith.Pooling
         [SerializeField] private List<PoolData> _poolDatas;
         public List<PoolData> PoolDatas { get => _poolDatas; set => _poolDatas = value; }
 
+        private bool _isInited;
+
         /// <summary> Başlangıç için istenilen sayida objeyi poola kazandirir </summary>
         public void InitialPoolObjects()
         {
+            if (_isInited) return;
             if (poolableData == null) return;
 
             for (int i = 0; i < poolableData.poolCount; i++)
             {
                 PoolObjectGenerator();
             }
+
+            _isInited = true;
         }
 
         /// <summary> Kullanılabilir pool objesi return eder </summary>
@@ -82,6 +87,7 @@ namespace Wonnasmith.Pooling
                 if (poolData.t == null) continue;
                 if (!poolData.t.Equals(t)) continue;
 
+                poolData.t.RePool();
                 poolData.isActive = true;
                 return;
             }
@@ -95,6 +101,8 @@ namespace Wonnasmith.Pooling
             foreach (PoolData poolData in PoolDatas)
             {
                 if (poolData == null) continue;
+
+                poolData.t.RePool();
                 poolData.isActive = true;
             }
         }
