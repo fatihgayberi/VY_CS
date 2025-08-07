@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using VY_CS.AmmoSystem;
+using Wonnasmith.Pooling;
 using VY_CS.AmmoSystem.Ammo;
 using VY_CS.AmmoSystem.Weapon;
 using System.Collections.Generic;
@@ -9,6 +10,7 @@ namespace VY_CS.Character
 {
     public class WeaponHandler : MonoBehaviour
     {
+        [SerializeField] private Pool<VY_Character> characterVisualPool;
         [SerializeField] private AmmoFactory ammoFactory;
         [SerializeField] private WeaponProperties defaultWeaponProperties;
 
@@ -30,6 +32,8 @@ namespace VY_CS.Character
 
         private void OnGameStart()
         {
+            characterVisualPool.InitialPoolObjects();
+
             _mainWeaponProperties = defaultWeaponProperties;
             _mainWeapon = new WeaponContainer();
             WeaponDataHandler.Initialize(ammoFactory.GetWeaponData(_mainWeaponProperties.WeaponType));
@@ -45,6 +49,7 @@ namespace VY_CS.Character
             }
 
             _weaponContainers?.Clear();
+            characterVisualPool.AllRePoolObject();
         }
 
         private void WeaponCreator(WeaponContainer weaponContainer, WeaponProperties weaponProperties)
@@ -61,6 +66,13 @@ namespace VY_CS.Character
             weaponContainer.WeaponBase.AttachMuzzle(weaponContainer.MuzzleBase);
 
             _weaponContainers.Add(weaponContainer);
+
+            Vector3 pos = UnityEngine.Random.insideUnitCircle * 3;
+
+            weaponContainer.WeaponBase.WeaponPosition = pos;
+            var character = characterVisualPool.GetPoolObject();
+            character.transform.position = pos;
+            character.gameObject.SetActive(true);
 
             weaponContainer.WeaponBase.ShootStarter();
         }

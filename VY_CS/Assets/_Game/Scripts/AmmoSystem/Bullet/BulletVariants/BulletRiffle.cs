@@ -8,6 +8,9 @@ namespace VY_CS.AmmoSystem.BulletVariants
     {
         public override void Move()
         {
+            if (transform == null) return;
+            if (WeaponDataHandler.WeaponPropertyController == null) return;
+
             transform.position += transform.right * WeaponDataHandler.WeaponPropertyController.GetPropertyValue(WeaponPropertyType.BulletSpeed) * Time.fixedDeltaTime;
         }
     }

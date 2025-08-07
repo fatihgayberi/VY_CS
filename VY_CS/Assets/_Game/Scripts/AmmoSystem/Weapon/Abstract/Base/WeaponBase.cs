@@ -13,7 +13,7 @@ namespace VY_CS.AmmoSystem.Weapon
         protected MuzzleBase _muzzleBase;
         protected BulletMagazine _magazine;
         private WeaponState _weaponState = new();
-        protected Vector2 weaponPosition;
+        public Vector2 WeaponPosition;
 
         private CancellationTokenSource _shootCts;
 
@@ -29,7 +29,6 @@ namespace VY_CS.AmmoSystem.Weapon
             StopShooting();
 
             _shootCts = new CancellationTokenSource();
-            weaponPosition = UnityEngine.Random.insideUnitCircle * 5f;
             StartShootLoop(_shootCts.Token).Forget();
         }
 
@@ -53,6 +52,8 @@ namespace VY_CS.AmmoSystem.Weapon
             {
                 while (!token.IsCancellationRequested)
                 {
+                    if (WeaponDataHandler.WeaponPropertyController == null) break;
+
                     serialShootBulletCount = WeaponDataHandler.WeaponPropertyController.GetPropertyValue(WeaponPropertyType.SerialShootBulletCount);
                     serialShootBulletWaitTime = WeaponDataHandler.WeaponPropertyController.GetPropertyValue(WeaponPropertyType.SerialShootBulletWaitTime);
                     fireRate = WeaponDataHandler.WeaponPropertyController.GetPropertyValue(WeaponPropertyType.FireRate);

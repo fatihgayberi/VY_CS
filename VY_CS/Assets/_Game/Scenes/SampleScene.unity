@@ -1371,6 +1371,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98a01fb6d8220e545b71fef103238487, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterVisualPool:
+    poolableData:
+      poolPrefab: {fileID: 7958104559680048491, guid: cb2ad23bd9fe22a4d9de5d563b389d01, type: 3}
+      poolCount: 2
+    _poolDatas: []
   ammoFactory:
     weaponData:
     - {fileID: 11400000, guid: ade576f9970d250448de6d2456c6f0d1, type: 2}
@@ -1381,7 +1386,7 @@ MonoBehaviour:
           poolPrefab: {fileID: 1363214450393513386, guid: 8e374a55f49b2844f940fd24f166ae5a, type: 3}
           poolCount: 30
         _poolDatas: []
-  mainWeaponProperties:
+  defaultWeaponProperties:
     WeaponType: 1
     BulletType: 1
     MuzzleType: 1
