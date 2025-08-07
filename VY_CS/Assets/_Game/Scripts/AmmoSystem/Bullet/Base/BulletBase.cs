@@ -43,6 +43,8 @@ namespace VY_CS.AmmoSystem.Bullet
                 {
                     token.ThrowIfCancellationRequested();
 
+                    if (this == null) return;
+
                     Move();
                     await UniTask.Yield(PlayerLoopTiming.FixedUpdate, token);
                     elapsedTime += Time.fixedDeltaTime;

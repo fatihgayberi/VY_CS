@@ -1,5 +1,4 @@
 using System;
-using UnityEngine;
 using Wonnasmith.Singleton;
 
 namespace VY_CS
@@ -22,21 +21,17 @@ namespace VY_CS
             if (newGameState == GameState.START)
             {
                 _currentGameState = GameState.START;
-                Debug.Log("_currentGameState" + _currentGameState);
                 GameStart?.Invoke();
                 
                 _currentGameState = GameState.PLAYING;
-                Debug.Log("_currentGameState" + _currentGameState);
                 GamePlaying?.Invoke();
             }
             else if (newGameState == GameState.EXIT)
             {
                 _currentGameState = GameState.EXIT;
-                Debug.Log("_currentGameState" + _currentGameState);
                 GameExit?.Invoke();
 
                 _currentGameState = GameState.NONE;
-                Debug.Log("_currentGameState" + _currentGameState);
             }
         }
     }
