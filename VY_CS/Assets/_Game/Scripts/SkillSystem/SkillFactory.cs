@@ -25,6 +25,11 @@ namespace VY_CS.SkillSystem
         private void OnGameStart()
         {
             currentSkillCount = 0;
+
+            foreach (var binding in buttons)
+            {
+                binding.button.interactable = true;
+            }
         }
 
         private void Start()
@@ -36,13 +41,19 @@ namespace VY_CS.SkillSystem
         {
             foreach (var binding in buttons)
             {
-                binding.button.onClick.AddListener(() => CreateSkill(binding.skillType));
+                binding.button.onClick.AddListener(() => SkillButton(binding.button, binding.skillType));
             }
         }
 
-        public void CreateSkill(SkillType skillType)
+        private void SkillButton(Button button, SkillType skillType)
         {
-            if (currentSkillCount >= maxSkillCount) return;
+            bool isCreated = CreateSkill(skillType);
+            if (isCreated) button.interactable = false;
+        }
+
+        private bool CreateSkill(SkillType skillType)
+        {
+            if (currentSkillCount >= maxSkillCount) return false;
 
             SkillBase skillBase = skillType switch
             {
@@ -57,6 +68,8 @@ namespace VY_CS.SkillSystem
             currentSkillCount++;
 
             skillBase?.Activate();
+
+            return true;
         }
 
         [Serializable]

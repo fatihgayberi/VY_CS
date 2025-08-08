@@ -8,6 +8,7 @@ namespace VY_CS.SkillSystem
     {
         public override void Activate()
         {
+            // default deger 3 oldugu icin burada elle 2 verdim parametereyi
             WeaponDataHandler.WeaponPropertyController.Decrease(WeaponPropertyType.FireRate, 2f);
         }
     }

@@ -7,8 +7,8 @@ namespace VY_CS.AmmoSystem.Muzzle
 {
     public class MuzzleAngular : MuzzleBase
     {
-        [SerializeField] private int angle = 60;         // Toplam açı yayılımı
-        [SerializeField] private int angleCount = 5;     // Kaç mermi atılacak
+        private int _angle = 45;
+        private int _angleCount = 2;
 
         private HashSet<BulletBase> _bullets = new();
 
@@ -16,21 +16,22 @@ namespace VY_CS.AmmoSystem.Muzzle
         {
             _bullets.Clear();
 
-            float angleStep = angleCount > 1 ? (float)angle / (angleCount - 1) : 0f;
+            int buletCount = _angleCount + 1;
+            float angleStep = buletCount > 1 ? (float)_angle / (buletCount - 1) : 0f;
             float startAngle;
 
-            if (angleCount % 2 == 1)
+            if (buletCount % 2 == 1)
             {
                 // Tek sayida -> Ortadan basla
-                startAngle = -angle / 2f;
+                startAngle = -_angle / 2f;
             }
             else
             {
                 // Cift sayıda -> Ortada mermi yok
-                startAngle = -angle / 2f + angleStep / 2f;
+                startAngle = -_angle / 2f + angleStep / 2f;
             }
 
-            for (int i = 0; i < angleCount; i++)
+            for (int i = 0; i < buletCount; i++)
             {
                 BulletBase bullet = magazine.GetBullet();
 

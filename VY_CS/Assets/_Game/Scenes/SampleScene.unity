@@ -289,7 +289,13 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 714926811128329298, guid: 8a53fae56e6a67f4d9500d5f2446bf4a, type: 3}
       propertyPath: m_text
-      value: Clone Player
+      value: 'Clone
+
+        Player'
+      objectReference: {fileID: 0}
+    - target: {fileID: 714926811128329298, guid: 8a53fae56e6a67f4d9500d5f2446bf4a, type: 3}
+      propertyPath: m_fontSize
+      value: 52.9
       objectReference: {fileID: 0}
     - target: {fileID: 714926811414415808, guid: 8a53fae56e6a67f4d9500d5f2446bf4a, type: 3}
       propertyPath: m_RootOrder
@@ -676,7 +682,13 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 714926811128329298, guid: 8a53fae56e6a67f4d9500d5f2446bf4a, type: 3}
       propertyPath: m_text
-      value: Double Shoot
+      value: 'Double
+
+        Shoot'
+      objectReference: {fileID: 0}
+    - target: {fileID: 714926811128329298, guid: 8a53fae56e6a67f4d9500d5f2446bf4a, type: 3}
+      propertyPath: m_fontSize
+      value: 52.9
       objectReference: {fileID: 0}
     - target: {fileID: 714926811414415808, guid: 8a53fae56e6a67f4d9500d5f2446bf4a, type: 3}
       propertyPath: m_RootOrder
@@ -749,7 +761,13 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 714926811128329298, guid: 8a53fae56e6a67f4d9500d5f2446bf4a, type: 3}
       propertyPath: m_text
-      value: Bullet Speed
+      value: 'Bullet
+
+        Speed'
+      objectReference: {fileID: 0}
+    - target: {fileID: 714926811128329298, guid: 8a53fae56e6a67f4d9500d5f2446bf4a, type: 3}
+      propertyPath: m_fontSize
+      value: 52.9
       objectReference: {fileID: 0}
     - target: {fileID: 714926811414415808, guid: 8a53fae56e6a67f4d9500d5f2446bf4a, type: 3}
       propertyPath: m_RootOrder
@@ -822,7 +840,13 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 714926811128329298, guid: 8a53fae56e6a67f4d9500d5f2446bf4a, type: 3}
       propertyPath: m_text
-      value: Fire Rate Update
+      value: 'Fire
+
+        Rate'
+      objectReference: {fileID: 0}
+    - target: {fileID: 714926811128329298, guid: 8a53fae56e6a67f4d9500d5f2446bf4a, type: 3}
+      propertyPath: m_fontSize
+      value: 52.9
       objectReference: {fileID: 0}
     - target: {fileID: 714926811414415808, guid: 8a53fae56e6a67f4d9500d5f2446bf4a, type: 3}
       propertyPath: m_RootOrder
@@ -1788,8 +1812,14 @@ PrefabInstance:
     m_TransformParent: {fileID: 1764091608}
     m_Modifications:
     - target: {fileID: 714926811128329298, guid: 8a53fae56e6a67f4d9500d5f2446bf4a, type: 3}
+      propertyPath: m_text
+      value: 'Angular
+
+        Shoot'
+      objectReference: {fileID: 0}
+    - target: {fileID: 714926811128329298, guid: 8a53fae56e6a67f4d9500d5f2446bf4a, type: 3}
       propertyPath: m_fontSize
-      value: 26.6
+      value: 52.1
       objectReference: {fileID: 0}
     - target: {fileID: 714926811414415808, guid: 8a53fae56e6a67f4d9500d5f2446bf4a, type: 3}
       propertyPath: m_Pivot.x
